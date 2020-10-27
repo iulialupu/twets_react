@@ -9,7 +9,8 @@ const initialState = {
   userInfo: "",
 };
 
-// check if there is token, it's not expired,  set initialstate
+// check if there is token, it's not expired,
+// and set user initial state
 const token = localStorage.getItem("jwtToken");
 console.log("!", { token });
 if (token) {
@@ -18,12 +19,11 @@ if (token) {
     localStorage.removeItem("jwtToken");
   } else {
     initialState.userInfo = decodedToken;
-    decodedToken.isAuthenticated = true;
+    initialState.isAuthenticated = true;
   }
 }
 
 const reducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case "LOGIN_USER":
       return { ...state, isAuthenticated: true, userInfo: action.payload };
@@ -37,14 +37,13 @@ const reducer = (state = initialState, action) => {
 export function UserContextProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const history = useHistory();
-  console.log("history", history);
 
   const login = (authData) => {
     // 1. decode token
     const decodedToken = jwtDecode(authData.token);
     console.log({ decodedToken });
     // 2. set user info
-    dispatch({ type: "LOGOUT_USER", payload: decodedToken });
+    dispatch({ type: "LOGIN_USER", payload: decodedToken });
     // 3. set token to local storage
     localStorage.setItem("jwtToken", authData.token);
     // 4. redirect to home
