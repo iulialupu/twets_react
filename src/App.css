@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+* {
+  box-sizing: border-box;
+}
+/* 
+div {
+
+
+
+
+  width: 100%;
+  color: white;
+  padding: 6px 10px;
+border: none;
+outline: none;
+background-color: ;
+} */
