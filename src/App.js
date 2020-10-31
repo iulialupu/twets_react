@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import "./App.css";
-import LoginPage from "./components/LoginPage/index";
 import { UserContextProvider } from "./context/userContext";
+import LoginPage from "./components/LoginPage/index";
 import Home from "./components/Home";
 import User from "./components/User";
 

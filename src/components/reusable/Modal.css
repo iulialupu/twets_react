@@ -1,0 +1,15 @@
+.modal__overlay {
+  background-color: #6577867a;
+}
+.modal {
+  border-radius: 10px;
+  width: 90vw;
+  max-width: 420px;
+  padding: 2em;
+}
+.modal__close-btn,
+.modal__close-btn:focus,
+.modal__close-btn:active {
+  border: none !important;
+  outline: none;
+}

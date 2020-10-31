@@ -2,7 +2,12 @@ import React, { createContext, useReducer } from "react";
 import { useHistory } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
-export const UserContext = createContext({});
+export const UserContext = createContext({
+  // isAuthenticated,
+  // userInfo,
+  // login,
+  // register
+});
 
 const initialState = {
   isAuthenticated: false,
@@ -47,7 +52,8 @@ export function UserContextProvider(props) {
     // 3. set token to local storage
     localStorage.setItem("jwtToken", authData.token);
     // 4. redirect to home
-    history.push("/");
+    // (in loginPage component)
+    // history.push("/");
   };
   const logout = () => {
     // 1. clear user

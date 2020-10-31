@@ -59,7 +59,6 @@ function LoginForm() {
     if (data?.loginUser) loginContext(data.loginUser);
   }, [data]);
 
-  console.log(called, data, loading, error);
   return (
     <form>
       <InputContainer>

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { FiUsers, FiSearch, FiMessageSquare } from "react-icons/fi";
 import { FaTwitter } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 
 import { colors } from "../../cssVariables";
+import { UserContext } from "../../context/userContext";
 import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+import Modal from "../reusable/Modal";
 
 const list = [
   { icon: <FiSearch />, text: "Follow your interests" },
@@ -13,6 +17,13 @@ const list = [
 ];
 
 function LoginPage() {
+  const history = useHistory();
+  const { isAuthenticated } = useContext(UserContext);
+
+  useEffect(() => {
+    if (isAuthenticated) history.push("/");
+  }, [isAuthenticated]);
+
   return (
     <Main>
       <Half blue>
@@ -34,7 +45,9 @@ function LoginPage() {
           <LoginForm />
           <div style={{ marginTop: "1.5em" }}>
             <SecondaryBtn>Forgot password</SecondaryBtn>
-            <SecondaryBtn>Sign up</SecondaryBtn>
+            <Modal button={<SecondaryBtn>Sign up</SecondaryBtn>}>
+              <RegisterForm />
+            </Modal>
           </div>
         </Container>
       </Half>
@@ -85,13 +98,11 @@ const Container = styled.div`
   max-width: 360px;
   margin: 3em;
 `;
-
 const TwitterIcon = styled(FaTwitter)`
   color: ${colors.blue};
   font-size: 40px;
   margin-bottom: 0;
 `;
-
 const SecondaryBtn = styled.a`
   color: grey;
   text-decoration: underline;
