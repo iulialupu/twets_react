@@ -7,6 +7,7 @@ import { UserContextProvider } from "./context/userContext";
 import LoginPage from "./components/LoginPage/index";
 import Home from "./components/Home";
 import User from "./components/User";
+import TopNav from "./components/TopNav";
 
 function App() {
   const client = new ApolloClient({
@@ -18,6 +19,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <UserContextProvider>
+          <TopNav />
           <Switch>
             <Route path="/login" exact component={LoginPage} />
             <Route path="/user" exact component={User} />
