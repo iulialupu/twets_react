@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { UserContext } from "../../context/userContext";
-import { theme } from "../../cssVariables";
+import { themes } from "../../cssVariables";
+import Page from "../Page";
 
 const colorVersions = [
   "primary",
@@ -19,18 +20,15 @@ const colorHues = ["blue", "orange", "yellow", "green", "red", "purple"];
 function Home() {
   const { userInfo, isAuthenticated, logout } = useContext(UserContext);
   const [theme, setTheme] = useState("dark");
-  console.log({ userInfo, isAuthenticated });
   if (!isAuthenticated)
     return (
-      <div>
+      <Page>
         Please login <Link to="/login">Login page</Link>
-      </div>
+      </Page>
     );
   if (isAuthenticated)
     return (
-      <div>
-        welcome, {userInfo.username}, {userInfo.id}
-        <button onClick={logout}>Log out</button>
+      <Page>
         <button
           onClick={() => setTheme((s) => (s === "dark" ? "light" : "dark"))}
         >
@@ -38,7 +36,7 @@ function Home() {
         </button>
         <div
           style={{
-            backgroundColor: theme[theme].background,
+            backgroundColor: themes[theme].background,
             display: "flex",
             flexWrap: "wrap",
           }}
@@ -48,11 +46,11 @@ function Home() {
               {colorVersions.map((version, i) => (
                 <li key={i}>
                   <Box color={hue} version={version} />
-                  <h3 style={{ color: theme[theme].primaryText, margin: 0 }}>
+                  <h3 style={{ color: themes[theme].primaryText, margin: 0 }}>
                     {hue}
                   </h3>
-                  <p style={{ color: theme[theme].primaryText }}>{version}</p>
-                  <span style={{ color: theme[theme].secondaryText }}>
+                  <p style={{ color: themes[theme].primaryText }}>{version}</p>
+                  <span style={{ color: themes[theme].secondaryText }}>
                     {version}
                   </span>
                 </li>
@@ -60,7 +58,7 @@ function Home() {
             </ol>
           ))}
         </div>
-      </div>
+      </Page>
     );
 }
 
@@ -70,5 +68,5 @@ const Box = styled.div`
   width: 50px;
   height: 50px;
   display: inline-block;
-  background-color: ${({ color, version }) => theme[color][version]};
+  background-color: ${({ color, version }) => themes[color][version]};
 `;

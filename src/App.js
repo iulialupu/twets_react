@@ -2,12 +2,11 @@ import React, { useEffect } from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import "./App.css";
 import { UserContextProvider } from "./context/userContext";
+import { ThemeContextProvider } from "./context/themeContext";
 import LoginPage from "./components/LoginPage/index";
 import Home from "./components/Home";
 import User from "./components/User";
-import TopNav from "./components/TopNav";
 
 function App() {
   const client = new ApolloClient({
@@ -19,12 +18,13 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <UserContextProvider>
-          <TopNav />
-          <Switch>
-            <Route path="/login" exact component={LoginPage} />
-            <Route path="/user" exact component={User} />
-            <Route path="/" component={Home} />
-          </Switch>
+          <ThemeContextProvider>
+            <Switch>
+              <Route path="/login" exact component={LoginPage} />
+              <Route path="/user" exact component={User} />
+              <Route path="/" component={Home} />
+            </Switch>
+          </ThemeContextProvider>
         </UserContextProvider>
       </Router>
     </ApolloProvider>

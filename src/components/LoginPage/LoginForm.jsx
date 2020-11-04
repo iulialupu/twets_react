@@ -14,7 +14,7 @@ function LoginForm() {
 
   const [{ email, password }, setState] = useState({
     email: "iulia@mail.com",
-    password: "112211",
+    password: "",
   });
   const [isTouched, setIsTouched] = useState({ email: false, password: false });
   const [error, setError] = useState({ email: "", password: "" });

@@ -1,9 +1,9 @@
 import React, { createContext, useEffect, useState } from "react";
 
-const DEFAULT_COLOR = "blue";
-const DEFAULT_THEME = "light";
+const DEFAULT_COLOR = "yellow";
+const DEFAULT_THEME = "dark";
 
-const HUES = {
+export const HUES = {
   blue: 203,
   orange: 40,
   red: 0,
@@ -36,8 +36,8 @@ const THEMES = {
 
 const initialState = {
   chosen: {
-    color: "",
-    theme: "",
+    color: DEFAULT_COLOR,
+    theme: DEFAULT_THEME,
   },
   color: getColors(HUES[DEFAULT_COLOR]),
   theme: THEMES[DEFAULT_THEME],
@@ -45,9 +45,10 @@ const initialState = {
 
 const lSColorTheme = localStorage.getItem("color-theme");
 if (lSColorTheme) {
-  initialState.chosen = lSColorTheme;
-  initialState.color = getColors(HUES[lSColorTheme.color]);
-  initialState.theme = THEMES[lSColorTheme.theme];
+  const lSChosenObj = JSON.parse(lSColorTheme);
+  initialState.chosen = lSChosenObj;
+  initialState.color = getColors(HUES[lSChosenObj.color]);
+  initialState.theme = THEMES[lSChosenObj.theme];
 }
 
 export const ThemeContext = createContext({
@@ -62,18 +63,18 @@ export function ThemeContextProvider(props) {
   const changeColor = (chosenColor) =>
     setState((s) => ({
       ...s,
-      chosen: { ...s, color: chosenColor },
+      chosen: { ...s.chosen, color: chosenColor },
       color: getColors(HUES[chosenColor]),
     }));
   const changeTheme = (chosenTheme) =>
     setState((s) => ({
       ...s,
-      chosen: { ...s, theme: chosenTheme },
+      chosen: { ...s.chosen, theme: chosenTheme },
       theme: THEMES[chosenTheme],
     }));
 
   useEffect(() => {
-    localStorage.setItem("color-theme", state.chosen);
+    localStorage.setItem("color-theme", JSON.stringify(state.chosen));
   }, [state.chosen.color, state.chosen.theme]);
 
   return (

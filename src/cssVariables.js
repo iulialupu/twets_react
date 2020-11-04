@@ -44,7 +44,7 @@ const yellowHSL = {
   l: 53,
 };
 
-export const theme = {
+export const themes = {
   light: {
     background: "#fff",
     primaryText: "#000",

@@ -5,10 +5,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
 }
 
 * {
   box-sizing: border-box;
+}
+
+a,
+a:hover,
+a:active {
+  text-decoration: none !important;
 }
 
 code {
